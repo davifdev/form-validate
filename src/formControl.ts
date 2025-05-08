@@ -16,6 +16,11 @@ form.addEventListener("submit", function (event: Event) {
   checkUsername(username);
   checkEmailIsValid(email);
   checkEqualPassword(password, confirmPassword);
+
+  if (sendForm()) {
+    window.location.href = "/dist/formSucces.html";
+  }
+
 });
 
 function checkFieldsIsEmpty(...inputs: HTMLInputElement[]): void {
@@ -49,8 +54,7 @@ function checkEqualPassword(
 }
 
 function hideErrorMessages(form: HTMLFormElement) {
-  const formError = form.querySelectorAll(".error-message");
-
+  const formError = form.querySelectorAll(".form-fields");
   formError.forEach((err) => err.classList.remove("show-error-message"));
 }
 
@@ -62,4 +66,17 @@ function showErrorMessage(input: HTMLInputElement, msg: string): void {
 
   errorMessage.innerHTML = msg;
   formFields.classList.add("show-error-message");
+}
+
+function sendForm(): boolean {
+  let send = true;
+
+  const formError = form.querySelectorAll(".form-fields");
+  formError.forEach((field) => {
+    if (field.classList.contains("show-error-message")) {
+      send = false;
+    }
+  });
+
+  return send;
 }
