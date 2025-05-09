@@ -53,7 +53,7 @@ function checkEqualPassword(
   }
 }
 
-function hideErrorMessages(form: HTMLFormElement) {
+function hideErrorMessages(form: HTMLFormElement): void {
   const formError = form.querySelectorAll(".form-fields");
   formError.forEach((err) => err.classList.remove("show-error-message"));
 }
